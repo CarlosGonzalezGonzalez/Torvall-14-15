@@ -1,5 +1,9 @@
 package es.torvall;
 
+import java.io.Serializable;
+import java.util.GregorianCalendar;
+import java.util.Objects;
+
 public class Employee implements Serializable {
     private int emp_no;
     private String lastname;
@@ -9,7 +13,7 @@ public class Employee implements Serializable {
     private float Salary;
     private int commission;
     private int Dept_number;
-    private final int tamañoTotal=9;
+    private final int tamanoTotal=9;
     public Employee(){
         
     }
@@ -40,7 +44,7 @@ public class Employee implements Serializable {
 
     public void setLastname(String lastname) {
         if(lastname.length()>10){
-            this.lastname=lastname.substring(0,tamañoTotal);
+            this.lastname=lastname.substring(0,tamanoTotal);
         }
         
         this.lastname=lastname.substring(0,lastname.length());
@@ -52,7 +56,7 @@ public class Employee implements Serializable {
 
     public void setName_for(String name_for) {
         if(name_for.length()>10){
-            this.name_for=name_for.substring(0,tamañoTotal);
+            this.name_for=name_for.substring(0,tamanoTotal);
         }
         
         this.name_for=name_for.substring(0,name_for.length());
@@ -64,7 +68,7 @@ public class Employee implements Serializable {
 
     public void setJob(String job) {
          if(job.length()>10){
-            this.job=job.substring(0,tamañoTotal);
+            this.job=job.substring(0,tamanoTotal);
         }
         
         this.job=job.substring(0,job.length());
