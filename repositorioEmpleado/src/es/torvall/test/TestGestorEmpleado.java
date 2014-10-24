@@ -6,15 +6,5 @@ import org.junit.Test;
 
 public class TestGestorEmpleado {
 
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void testListarEmpleados(){
-
-		
-	}
 
 }
