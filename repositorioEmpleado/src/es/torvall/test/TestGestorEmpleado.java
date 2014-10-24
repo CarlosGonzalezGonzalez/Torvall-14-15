@@ -10,5 +10,11 @@ public class TestGestorEmpleado {
 	public void test() {
 		fail("Not yet implemented");
 	}
+	
+	@Test
+	public void testListarEmpleados(){
+
+		
+	}
 
 }
