@@ -10,7 +10,7 @@ public class GestorEmpleados {
     /*La siguiente clase recibe un identificador de empleado y el salario
     ** nuevo que debera tener ese empleado
     */
-    public static void cambiarSalario(int id,int salario){
+    public  void cambiarSalario(int id,int salario){
         Employee e =null;
         File f = new File(ruta);
         ObjectInputStream ois = null;
