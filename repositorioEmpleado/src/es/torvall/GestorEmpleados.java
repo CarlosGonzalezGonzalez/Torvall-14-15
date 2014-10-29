@@ -104,5 +104,18 @@ public class GestorEmpleados {
             }
         }
     }
+    public int numeroEmpleadoPorDepartemento(int idDepartamento){
+    	int numeroEmpleadosEnDepartemento;
+    	Employee e;
+    	//if (employeeList.size()==0){
+    		cargarFichero();
+    	//}
+    	for(int i=0;i<employeeList.size();i++){
+    		if (employeeList[i]){
+    			numeroEmpleadoEnDepartamento++;
+    		}
+    	}
+    	return numeroEmpleadoEnDepartamento;
+    }
 
 }
