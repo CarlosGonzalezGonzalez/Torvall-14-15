@@ -3,7 +3,9 @@ package es.torvall;
 public class GestorEmpleados {
  public static final String fichero = "./resources/empleados";
  private static final ArrayList<Employee> employeeList=new ArrayList();
-
+   /*La siguiente clase recibe un identificador de empleado y el salario
+    ** nuevo que debera tener ese empleado
+    */
     public void cambiarSalario(int id, int salario) {
         ObjectOutputStream streamSalida = null;
         cargarFichero();
