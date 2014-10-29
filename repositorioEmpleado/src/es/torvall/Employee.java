@@ -2,7 +2,6 @@ package es.torvall;
 
 import java.io.Serializable;
 import java.util.GregorianCalendar;
-import java.util.Objects;
 
 public class Employee implements Serializable {
     private int emp_no;
@@ -127,16 +126,16 @@ public class Employee implements Serializable {
         if (this.emp_no != other.emp_no) {
             return false;
         }
-        if (!Objects.equals(this.lastname, other.lastname)) {
+        if (!this.lastname.equals(other.lastname)) {
             return false;
         }
-        if (!Objects.equals(this.name_for, other.name_for)) {
+        if (!this.name_for.equals(other.name_for)) {
             return false;
         }
-        if (!Objects.equals(this.job, other.job)) {
+        if (!this.job.equals(other.job)) {
             return false;
         }
-        if (!Objects.equals(this.regis_date, other.regis_date)) {
+        if (!this.regis_date.equals(other.regis_date)) {
             return false;
         }
         if (Float.floatToIntBits(this.Salary) != Float.floatToIntBits(other.Salary)) {
