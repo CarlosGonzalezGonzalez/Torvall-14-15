@@ -27,9 +27,7 @@ public class GestorEmpleados {
                 streamSalida.writeObject(emp);
             }
 
-            if (streamSalida == null) {
-                streamSalida.close();
-            }
+           
         } catch (IOException ex) {
             System.err.println("Error E/S");
         } finally {
