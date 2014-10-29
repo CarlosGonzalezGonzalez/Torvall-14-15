@@ -6,5 +6,8 @@ import org.junit.Test;
 
 public class TestGestorEmpleado {
 
-
+	@Test
+	public void testListarEmpleados() {
+		
+	}
 }

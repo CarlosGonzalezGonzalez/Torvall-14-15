@@ -11,13 +11,13 @@ import java.util.ArrayList;
 
 public class Main {
 
-	public static final String fichero = "./resources/empleados";
-
 	public static void main(String[] args) {
 
 		ArrayList<Employee> employeeList = new ArrayList<Employee>();
 		Employee e;
+		GestorEmpleados ge = new GestorEmpleados();
 
+		/*
 		// Listado de empleados
 		employeeList.add(new Employee(7902, "Norris", "Chuck", "empleado",
 				"17/12/1990", 5000, 0, 1145));
@@ -65,6 +65,6 @@ public class Main {
 
 		} catch (ClassNotFoundException e1) {
 
-		}		
+		}		*/
 	}
 }
