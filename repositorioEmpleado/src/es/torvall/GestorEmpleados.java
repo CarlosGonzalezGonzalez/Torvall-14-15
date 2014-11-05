@@ -105,4 +105,51 @@ public class GestorEmpleados {
         }
     }
 
+	
+
+
+	// Metodo para encotrar un empleado por su id
+	public Employee listarEmpleados(int id) throws ClienteNoEncontrado{
+		Employee empleado = null;
+		Employee respuesta = null;
+		// Creamos el flujo
+		FileInputStream fis = null;
+		ObjectInputStream ois = null;
+
+		try {
+			// Abrimos el flujo
+			fis = new FileInputStream(fichero);
+			ois = new ObjectInputStream(fis);
+			empleado = (Employee) ois.readObject(); // Leemos un empleado
+			try{
+			while (empleado != null) {
+				if (empleado.getEmp_no() == id) {
+					respuesta = empleado; // Si el empleado tiene el id lo igualamos a la respuesta,que devolveremos mas adelante
+				}
+				empleado = (Employee) ois.readObject(); // Leemos otro empleado
+			}
+			} catch (EOFException e) {}
+		} catch (FileNotFoundException e) {
+			System.err.println("Fichero no encontrado");
+		} catch (IOException e) {
+			System.err.println("Error E/S");
+		} catch (ClassNotFoundException e) {
+			System.err.println("Clase no encontrada");
+		} finally {
+			try {
+				ois.close(); // Cerramos el flujo
+			} catch (IOException e) {
+				System.err.println("Error E/S (2)");
+			}
+		}
+		
+		if(respuesta!=null){
+			return respuesta; // Devolvemos el cliente
+		}else{
+			throw new ClienteNoEncontrado("No hay clientes con ese id"); // Mostramos el mensaje de que no hay clientes con el id introducido
+		}
+		
+	}
+	
+	
 }
