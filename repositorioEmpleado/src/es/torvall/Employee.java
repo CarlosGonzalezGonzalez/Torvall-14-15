@@ -10,6 +10,8 @@ import java.util.Date;
  * @author Juan
  */
 public class Employee implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private int emp_no;
 	private String lastname;
 	private String name_for;
@@ -105,7 +107,8 @@ public class Employee implements Serializable {
 	 * public String getRegis_date() { int
 	 * d=regis_date.get(GregorianCalendar.DAY_OF_MONTH); int
 	 * m=regis_date.get(GregorianCalendar.MONTH); int
-	 * y=regis_date.get(GregorianCalendar.YEAR); String s=d+"/"+m+"/"+y; return
+	 * y=regis_date.get(GregorianCalendar.YEAR);
+	 *  String s=d+"/"+m+"/"+y; return
 	 * s; }
 	 */
 
