@@ -1,6 +1,7 @@
 package es.torvall;
 
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -69,47 +70,44 @@ public class GestorEmpleados {
 		}
 
 	}
-	
 
-    public void cargarFichero( ) {
-        Employee e= new Employee(); 
-        ObjectInputStream streamEntrada = null;
+	public void cargarFichero() {
+		Employee e = new Employee();
+		ObjectInputStream streamEntrada = null;
 
-        try {
-            /*El metodo lee del archivo que le hemos pasado
-             **y guarda los objetos empleados en un ArrayList
-             */
-            streamEntrada = new ObjectInputStream(new FileInputStream(fichero));
+		try {
+			/*
+			 * El metodo lee del archivo que le hemos pasado*y guarda los
+			 * objetos empleados en un ArrayList
+			 */
+			streamEntrada = new ObjectInputStream(new FileInputStream(fichero));
 
-            e = (Employee) streamEntrada.readObject();
-            while (e != null) {
-                employeeList.add(e);
+			e = (Employee) streamEntrada.readObject();
+			while (e != null) {
+				employeeList.add(e);
 
-                e = (Employee) streamEntrada.readObject();
-            }
+				e = (Employee) streamEntrada.readObject();
+			}
 
-        } catch (FileNotFoundException e1) {
-            System.err.println("Error, archivo no encontrado");
-        } catch (EOFException e1) {
-            
-        } catch (IOException e1) {
-            System.err.println("Error E/S");
-        } catch (ClassNotFoundException ex) {
-            System.err.println("Error clase no econtrada");
-        } finally {
-            try {
-                streamEntrada.close();
-            } catch (IOException ex) {
-                System.err.println("Error E/S");
-            }
-        }
-    }
+		} catch (FileNotFoundException e1) {
+			System.err.println("Error, archivo no encontrado");
+		} catch (EOFException e1) {
 
-	
-
+		} catch (IOException e1) {
+			System.err.println("Error E/S");
+		} catch (ClassNotFoundException ex) {
+			System.err.println("Error clase no econtrada");
+		} finally {
+			try {
+				streamEntrada.close();
+			} catch (IOException ex) {
+				System.err.println("Error E/S");
+			}
+		}
+	}
 
 	// Metodo para encotrar un empleado por su id
-	public Employee listarEmpleados(int id) throws ClienteNoEncontrado{
+	public Employee listarEmpleados(int id) throws ClienteNoEncontrado {
 		Employee empleado = null;
 		Employee respuesta = null;
 		// Creamos el flujo
@@ -121,14 +119,18 @@ public class GestorEmpleados {
 			fis = new FileInputStream(fichero);
 			ois = new ObjectInputStream(fis);
 			empleado = (Employee) ois.readObject(); // Leemos un empleado
-			try{
-			while (empleado != null) {
-				if (empleado.getEmp_no() == id) {
-					respuesta = empleado; // Si el empleado tiene el id lo igualamos a la respuesta,que devolveremos mas adelante
+			try {
+				while (empleado != null) {
+					if (empleado.getEmp_no() == id) {
+						respuesta = empleado; // Si el empleado tiene el id lo
+												// igualamos a la respuesta,que
+												// devolveremos mas adelante
+					}
+					empleado = (Employee) ois.readObject(); // Leemos otro
+															// empleado
 				}
-				empleado = (Employee) ois.readObject(); // Leemos otro empleado
+			} catch (EOFException e) {
 			}
-			} catch (EOFException e) {}
 		} catch (FileNotFoundException e) {
 			System.err.println("Fichero no encontrado");
 		} catch (IOException e) {
@@ -142,14 +144,63 @@ public class GestorEmpleados {
 				System.err.println("Error E/S (2)");
 			}
 		}
-		
-		if(respuesta!=null){
+
+		if (respuesta != null) {
 			return respuesta; // Devolvemos el cliente
-		}else{
-			throw new ClienteNoEncontrado("No hay clientes con ese id"); // Mostramos el mensaje de que no hay clientes con el id introducido
+		} else {
+			throw new ClienteNoEncontrado("No hay clientes con ese id"); // Mostramos
+																			// el
+																			// mensaje
+																			// de
+																			// que
+																			// no
+																			// hay
+																			// clientes
+																			// con
+																			// el
+																			// id
+																			// introducido
 		}
-		
+
 	}
-	
-	
+
+	public boolean addEmpleado(Employee e) {
+
+		if (employeeList.add(e)) {
+
+			guardarFichero(fichero);
+			return true;
+		}
+
+		return false;
+
+	}
+
+	private String guardarFichero(String ruta) {
+		File temp = new File(ruta, "temp");
+		File archivo = new File(ruta, "empleados.bin");
+
+		ObjectOutputStream escribir = null;
+		try {
+			FileOutputStream fo = new FileOutputStream(temp);
+			escribir = new ObjectOutputStream(fo);
+			for (int i = 0; i < employeeList.size(); i++) {
+				escribir.writeObject(employeeList.get(i));
+			}
+			escribir.close();
+		} catch (FileNotFoundException fnfe) {
+		} catch (IOException ioe) {
+		}
+		if (temp.exists()) {
+			archivo.delete();
+			temp.renameTo(archivo);
+			return "Empleado Añadido al Archivo";
+
+		} else {
+			System.out.println("Temp No Existe");
+			return "Empleado NO Añadido al Archivo";
+		}
+
+	}
+
 }
