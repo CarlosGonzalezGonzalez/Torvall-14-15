@@ -22,9 +22,9 @@ public class GestorEmpleados {
         for (Employee emp : employeeList) {
             if (emp.getEmp_no() == id) {
                 try {
-					emp.setSalary(salario);
-				} catch (Exception e) {
-					System.err.println("Exception");
+		emp.setSalary(salario);
+		} catch (Exception e) {
+		System.err.println("Exception");
 				}
             }
             System.out.println(emp.toString());
