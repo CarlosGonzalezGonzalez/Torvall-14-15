@@ -1,9 +1,18 @@
-package es.torvall;
+package ejer2;
 
+import Employee.*;
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+/**
+ *
+ * @author Juan
+ */
 public class Employee implements Serializable {
     private int emp_no;
     private String lastname;
@@ -13,29 +22,45 @@ public class Employee implements Serializable {
     private float Salary;
     private int commission;
     private int Dept_number;
-    private final int tamanoTotal=9;
+    private final int tamanoTotal=10;
     public Employee(){
         
     }
 
     public Employee(int emp_no, String lastname, String name_for, String job
             , String regis_date, float Salary, int commission, int Dept_number) {
-        this.emp_no = emp_no;
-        this.setLastname(lastname);
-        this.setName_for(name_for);
-        this.setJob(job);
-        this.setRegis_date(regis_date);
-        this.Salary = Salary;
-        this.commission = commission;
-        this.Dept_number = Dept_number;
+        try {
+            this.setEmp_no(emp_no);
+            this.setLastname(lastname);
+            this.setName_for(name_for);
+            this.setJob(job);
+            this.setRegis_date(regis_date);
+            this.setSalary(Salary);
+            this.setCommission(commission);
+            this.setDept_number(Dept_number);
+        } catch (Exception ex) {
+           this.emp_no=0;
+           this.lastname=" ";
+           this.name_for=" ";
+           this.job=" ";
+           this.Salary=0;
+           this.commission=0;
+           this.Dept_number=0;
+        }
+       
     }
 
     public int getEmp_no() {
         return emp_no;
     }
 
-    public void setEmp_no(int emp_no) {
-        this.emp_no = emp_no;
+    public void setEmp_no(int emp_no) throws Exception {
+      if(emp_no<0){
+          throw new Exception("No se puede crear un empleado con id negativo");
+      }
+      
+      this.emp_no = emp_no;
+        
     }
 
     public String getLastname() {
@@ -43,11 +68,12 @@ public class Employee implements Serializable {
     }
 
     public void setLastname(String lastname) {
-        if(lastname.length()>10){
-            this.lastname=lastname.substring(0,tamanoTotal);
+        if (lastname.length() > 10) {
+          
+            this.lastname = lastname.substring(0, tamanoTotal); 
+        } else {
+            this.lastname = lastname;
         }
-        
-        this.lastname=lastname.substring(0,lastname.length());
     }
 
     public String getName_for() {
@@ -55,11 +81,13 @@ public class Employee implements Serializable {
     }
 
     public void setName_for(String name_for) {
-        if(name_for.length()>10){
+        if (name_for.length()>10){
             this.name_for=name_for.substring(0,tamanoTotal);
+        }else{
+            this.name_for=name_for;
         }
         
-        this.name_for=name_for.substring(0,name_for.length());
+        
     }
 
     public String getJob() {
@@ -69,9 +97,9 @@ public class Employee implements Serializable {
     public void setJob(String job) {
          if(job.length()>10){
             this.job=job.substring(0,tamanoTotal);
-        }
-        
-        this.job=job.substring(0,job.length());
+        }else{       
+        this.job=job;
+         }
     }
 
 
@@ -100,7 +128,8 @@ public class Employee implements Serializable {
         return Salary;
     }
 
-    public void setSalary(float Salary) {
+    public void setSalary(float Salary) throws Exception {
+        if(Salary<0) throw new Exception("No se puede crear un empleado con una salario negativo");
         this.Salary = Salary;
     }
 
@@ -108,7 +137,8 @@ public class Employee implements Serializable {
         return commission;
     }
 
-    public void setCommission(int commission) {
+    public void setCommission(int commission) throws Exception {
+        if(commission<0) throw new Exception("No se puede crear un empleado con una comision  negativa");
         this.commission = commission;
     }
 
@@ -116,8 +146,12 @@ public class Employee implements Serializable {
         return Dept_number;
     }
 
-    public void setDept_number(int Dept_number) {
+    public void setDept_number(int Dept_number) throws Exception {
+        if(Dept_number<0){
+            throw new Exception("No se puede crear un empleado con un numero de departamento negativo");
+        }else{
         this.Dept_number = Dept_number;
+    }
     }
     
     @Override
@@ -127,16 +161,16 @@ public class Employee implements Serializable {
         if (this.emp_no != other.emp_no) {
             return false;
         }
-        if (!Objects.equals(this.lastname, other.lastname)) {
+        if (this.equals( other.lastname)) {
             return false;
         }
-        if (!Objects.equals(this.name_for, other.name_for)) {
+        if (this.equals (other.name_for)) {
             return false;
         }
-        if (!Objects.equals(this.job, other.job)) {
+        if (this.equals(other.job)) {
             return false;
         }
-        if (!Objects.equals(this.regis_date, other.regis_date)) {
+        if (this.equals(other.regis_date)) {
             return false;
         }
         if (Float.floatToIntBits(this.Salary) != Float.floatToIntBits(other.Salary)) {
