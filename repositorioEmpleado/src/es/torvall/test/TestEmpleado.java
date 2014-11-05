@@ -93,11 +93,12 @@ public class TestEmpleado {
 		assertEquals("Entrenador", e4.getJob());
 
 	}
+	
 	@Test
 	public void pruebaDate() {
 		Employee e4 = new Employee(1, "San José", "Juan Pablo ", "Entrenador/Futbolista",
 				"25/10/2014", 0, 0, 0);
-		System.out.println(e4.getRegis_date());
+		System.out.println("fecha"+e4.getRegis_date());
 		assertEquals("25/10/2014", e4.getRegis_date());
 		
 		Employee e5 = new Employee(1, "Supercalifragilisticoexpialidoso",
