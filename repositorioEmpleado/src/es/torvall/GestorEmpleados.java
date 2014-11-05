@@ -22,24 +22,26 @@ public class GestorEmpleados {
         for (Employee emp : employeeList) {
             if (emp.getEmp_no() == id) {
                 try {
-		emp.setSalary(salario);
-		} catch (Exception e) {
-		System.err.println("Exception");
-				}
+                		emp.setSalary(salario);
+                } catch (Exception e) {
+                		System.err.println("Exception");
+                }
             }
             System.out.println(emp.toString());
         }
         guardarFichero();
     }
-
+  /*El metodo va a guardar en un archivo los empleados que hay 
+  **en un arraylist
+  */
     public void guardarFichero() {
         ObjectOutputStream streamSalida=null;
         
         try {
-            streamSalida = new ObjectOutputStream(new FileOutputStream(fichero));
+            streamSalida = new ObjectOutputStream(new FileOutputStream(fichero));//Empezamos a escribir
 
             for (Employee emp : employeeList) {
-                streamSalida.writeObject(emp);
+                streamSalida.writeObject(emp);//escribimos en el fichero
             }
 
            
@@ -48,7 +50,7 @@ public class GestorEmpleados {
         } finally {
 
             try {
-                streamSalida.close();
+                streamSalida.close();//terminamos de escribir
             } catch (IOException ex) {
                 System.err.println("Error E/S");
             }
@@ -63,11 +65,11 @@ public class GestorEmpleados {
             /*El metodo lee del archivo que le hemos pasado
              **y guarda los objetos empleados en un ArrayList
              */
-            streamEntrada = new ObjectInputStream(new FileInputStream(fichero));
+            streamEntrada = new ObjectInputStream(new FileInputStream(fichero));//Abrimos el flujo
 
             e = (Employee) streamEntrada.readObject();
             while (e != null) {
-                employeeList.add(e);
+                employeeList.add(e);//Añadimos el objeto employee a la clase empleado
 
                 e = (Employee) streamEntrada.readObject();
             }
@@ -82,7 +84,7 @@ public class GestorEmpleados {
             System.err.println("Error clase no econtrada");
         } finally {
             try {
-                streamEntrada.close();
+                streamEntrada.close();//Cerramos el flujo
             } catch (IOException ex) {
                 System.err.println("Error E/S");
             }
