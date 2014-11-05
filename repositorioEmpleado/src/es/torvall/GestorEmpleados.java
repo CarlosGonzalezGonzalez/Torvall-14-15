@@ -12,12 +12,13 @@ import java.util.ArrayList;
 public class GestorEmpleados {
 
 	public static final String fichero = "./resources/empleados";
+
 	private static final ArrayList<Employee> employeeList = new ArrayList();
 
 	/**
 	 * Método para crear un fichero de prueba
 	 */
-	private void dummy() {
+	public void dummy() {
 		Employee e;
 		// Listado de empleados
 		employeeList.add(new Employee(7902, "Norris", "Chuck", "empleado",
@@ -69,40 +70,65 @@ public class GestorEmpleados {
 		}
 
 	}
+
+	public void cargarFichero() {
+		cargarFichero(fichero);
+	}
+
+	public void cargarFichero(String path) {
+		Employee e = new Employee();
+		ObjectInputStream streamEntrada = null;
+
+		try {
+			/*
+			 * El metodo lee del archivo que le hemos pasado*y guarda los
+			 * objetos empleados en un ArrayList
+			 */
+			streamEntrada = new ObjectInputStream(new FileInputStream(path));
+
+			e = (Employee) streamEntrada.readObject();
+			while (e != null) {
+				employeeList.add(e);
+
+				e = (Employee) streamEntrada.readObject();
+			}
+
+		} catch (FileNotFoundException e1) {
+			System.err.println("Error, archivo no encontrado");
+		} catch (EOFException e1) {
+
+		} catch (IOException e1) {
+			System.err.println("Error E/S");
+		} catch (ClassNotFoundException ex) {
+			System.err.println("Error clase no econtrada");
+		} finally {
+			try {
+				streamEntrada.close();
+			} catch (IOException ex) {
+				System.err.println("Error E/S");
+			}
+		}
+	}
 	
+	/**
+	 * Metodo que elimina un Empleado por su ID
+	 * @param id
+	 * @return
+	 */
 
-    public void cargarFichero( ) {
-        Employee e= new Employee(); 
-        ObjectInputStream streamEntrada = null;
+	public String eliminar(int id) {
+		String s = null;
+		for (int i = 0; i < employeeList.size(); i++) {
+			if (employeeList.get(i).getEmp_no() == id) {
+				employeeList.remove(i);
+				s = "Borrado OK";
 
-        try {
-            /*El metodo lee del archivo que le hemos pasado
-             **y guarda los objetos empleados en un ArrayList
-             */
-            streamEntrada = new ObjectInputStream(new FileInputStream(fichero));
+			} else
+				s = "El Empleado No Existe";
 
-            e = (Employee) streamEntrada.readObject();
-            while (e != null) {
-                employeeList.add(e);
+		}
+		return s;
 
-                e = (Employee) streamEntrada.readObject();
-            }
-
-        } catch (FileNotFoundException e1) {
-            System.err.println("Error, archivo no encontrado");
-        } catch (EOFException e1) {
-            
-        } catch (IOException e1) {
-            System.err.println("Error E/S");
-        } catch (ClassNotFoundException ex) {
-            System.err.println("Error clase no econtrada");
-        } finally {
-            try {
-                streamEntrada.close();
-            } catch (IOException ex) {
-                System.err.println("Error E/S");
-            }
-        }
-    }
+	}
 
 }
