@@ -14,12 +14,13 @@ import java.util.Comparator;
 public class GestorEmpleados {
 
 	public static final String fichero = "./resources/empleados";
-	private static final ArrayList<Employee> employeeList = new ArrayList();
+	private  ArrayList<Employee> employeeList;
 
 	/**
 	 * MÃ©todo para crear un fichero de prueba
 	 */
-	private void dummy() {
+	public void dummy() {
+		employeeList = new  ArrayList<Employee>();
 		Employee e;
 		// Listado de empleados
 		employeeList.add(new Employee(7902, "Norris", "Chuck", "empleado",
@@ -54,7 +55,7 @@ public class GestorEmpleados {
 			e = (Employee) streamEntrada.readObject();
 			while (e != null) {
 
-				// System.out.println(e.toString());
+				 System.out.println(e.toString());
 				e = (Employee) streamEntrada.readObject();
 			}
 
@@ -73,6 +74,7 @@ public class GestorEmpleados {
 	}
 
 	public void cargarFichero() {
+		employeeList = new ArrayList<Employee>();
 		Employee e = new Employee();
 		ObjectInputStream streamEntrada = null;
 
@@ -95,7 +97,7 @@ public class GestorEmpleados {
 		} catch (EOFException e1) {
 
 		} catch (IOException e1) {
-			System.err.println("Error E/S");
+			System.err.println(e1.toString());
 		} catch (ClassNotFoundException ex) {
 			System.err.println("Error clase no econtrada");
 		} finally {
@@ -107,10 +109,18 @@ public class GestorEmpleados {
 		}
 	}
 
-	// Metodo para encotrar a los empleados ordenados por apellido
+	/**
+	 * @author Katy
+	 *  Metodo para encotrar a los empleados ordenados por apellido
+	 * @return un ArrayList de empleados ordenado por apellidos
+	 */
 
 	public ArrayList<Employee> ordenApellido() {
-
+		if(employeeList==null)
+			cargarFichero();
+		
+		// Llamamos al método sort que ordena la lista por apellidos de cada empleado 
+		// mediante un objeto Comparator
 		Collections.sort(employeeList, new Comparator<Employee>() {
 			public int compare(Employee e1, Employee e2) {
 				return e1.getLastname().compareTo(e2.getLastname());
