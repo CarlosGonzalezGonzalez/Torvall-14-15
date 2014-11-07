@@ -227,9 +227,11 @@ public void dummy() {
 	* @author Juan
 	* Metodo que lista los departamentos
 	*/
-	public  ArrayList listarDepartamentos() {
+	public static  ArrayList listarDepartamentos() {
        ArrayList<Integer> listDept = new ArrayList();
-       ArrayList<Employee>employeeList=null;    
+       ArrayList<Employee>employeeList=null; 
+       
+       HashSet<Integer> conjunto = new HashSet<Integer>();
        
         int departamento = 0;
        
@@ -237,19 +239,10 @@ public void dummy() {
 
         for (int i = 0; i <employeeList.size(); i++) {
             departamento = employeeList.get(i).getDept_number();         
-                listDept.add(departamento); 
-            }
-      
-          for (int i=0;i<employeeList.size();i++){
-              int depart=employeeList.get(i).getDept_number();
-              for(int j=i+1;j<listDept.size();j++){
-                  if(listDept.get(j).intValue()==depart){
-                      listDept.remove(j);
-                  }
-              }
-              
-          }
-                        
+                conjunto.add(departamento);
+            }     
+               listDept.addAll(conjunto);
+               
         return listDept;
     }
 }
