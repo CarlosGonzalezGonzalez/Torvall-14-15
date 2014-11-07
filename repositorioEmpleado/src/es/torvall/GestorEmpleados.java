@@ -14,7 +14,7 @@ public class GestorEmpleados {
 	private  ArrayList<Employee> employeeList;
 
 	/**
-	 * M�todo para crear un fichero de prueba
+	 * Método para crear un fichero de prueba
 	 */
 public void dummy() {
 		Employee e;
@@ -122,7 +122,7 @@ public void dummy() {
 			e = (Employee) streamEntrada.readObject();
 			while (e != null) {
 				//System.out.println(e);
-				employeeList.add(e);// Añadimos el objeto employee a la clase
+				employeeList.add(e);// AÃ±adimos el objeto employee a la clase
 									// empleado
 
 				e = (Employee) streamEntrada.readObject();
@@ -210,7 +210,7 @@ public void dummy() {
 
 		for (Employee empleado : employeeList) {
 			if (empleado.getDept_number() == departamento) { // Si el departamento del empleado es = al departamento introducido...
-				sueldoMedio = sueldoMedio + empleado.getSalary(); // a�adimos su sueldo
+				sueldoMedio = sueldoMedio + empleado.getSalary(); // añadimos su sueldo
 				contadorEmpleados++; // incrementamos la cantidad de empleados que hay en el departamento
 			}
 		}
@@ -222,4 +222,34 @@ public void dummy() {
 		return 0;
 
 	}
+	/**
+	*
+	* @author Juan
+	* Metodo que lista los departamentos
+	*/
+	public  ArrayList listarDepartamentos() {
+       ArrayList<Integer> listDept = new ArrayList();
+       ArrayList<Employee>employeeList=null;    
+       
+        int departamento = 0;
+       
+        employeeList=cargarFichero();
+
+        for (int i = 0; i <employeeList.size(); i++) {
+            departamento = employeeList.get(i).getDept_number();         
+                listDept.add(departamento); 
+            }
+      
+          for (int i=0;i<employeeList.size();i++){
+              int depart=employeeList.get(i).getDept_number();
+              for(int j=i+1;j<listDept.size();j++){
+                  if(listDept.get(j).intValue()==depart){
+                      listDept.remove(j);
+                  }
+              }
+              
+          }
+                        
+        return listDept;
+    }
 }
