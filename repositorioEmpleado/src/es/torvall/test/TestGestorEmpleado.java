@@ -20,6 +20,14 @@ public class TestGestorEmpleado {
 		} catch (ClienteNoEncontrado e) {}
 	}
 	
+	@SuppressWarnings("deprecation")
+	public void testCalcularSueldoMedio(){
+		GestorEmpleados ge = new GestorEmpleados();
+		
+		assertEquals(2700f,ge.calcularSueldoMedio(1145));
+		assertEquals(0f,ge.calcularSueldoMedio(1));
+	}
+	
      public void cambiarSalario() {
        
         ArrayList<Employee> employeeList = new ArrayList();
