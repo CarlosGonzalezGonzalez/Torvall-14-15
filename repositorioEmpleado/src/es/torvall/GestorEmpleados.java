@@ -222,4 +222,18 @@ public void dummy() {
 		return 0;
 
 	}
+	public String eliminar(int id) {
+		String s = null;
+		for (int i = 0; i < employeeList.size(); i++) {
+			if (employeeList.get(i).getEmp_no() == id) {
+				employeeList.remove(i);
+				s = "Borrado OK";
+
+			} else
+				s = "El Empleado No Existe";
+
+		}
+		return s;
+
+	}
 }

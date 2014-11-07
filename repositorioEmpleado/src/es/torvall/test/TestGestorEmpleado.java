@@ -20,14 +20,13 @@ public class TestGestorEmpleado {
 		} catch (ClienteNoEncontrado e) {}
 	}
 	
-	@SuppressWarnings("deprecation")
+	@Test
 	public void testCalcularSueldoMedio(){
 		GestorEmpleados ge = new GestorEmpleados();
 		
 		assertEquals(2700f,ge.calcularSueldoMedio(1145));
 		assertEquals(0f,ge.calcularSueldoMedio(1));
 	}
-	
      public void cambiarSalario() {
        
         ArrayList<Employee> employeeList = new ArrayList();
@@ -56,5 +55,16 @@ public class TestGestorEmpleado {
         assertTrue(employeeList.get(0).getSalary()==500);//Aqui comprobamos que el nuevo salario es el correcto
         assertFalse(employeeList.get(2).getSalary()==5000);//Aqui comprobamos que el salario del empleado se ha modificado y no es igual a su salario anterior
     }
+
+	@Test
+	public void pruebaEliminar(){
+		GestorEmpleados g = new GestorEmpleados();
+		g.cargarFichero("./resources/empleados2");
+		
+		assertEquals("Borrado OK",g.eliminar(7902));
+		
+		
+		assertEquals("El Empleado No Existe",g.eliminar(6));
+	}
 
 }
