@@ -71,5 +71,22 @@ public class TestGestorEmpleado {
 		
 		assertEquals("El Empleado No Existe",g.eliminar(6));
 	}
+	
+	/**
+	* @author carlos barriuso
+ 	*El metodo comprueba que el metodo numeroEmpleadoPorDepartamento
+ 	*funciona correctamente
+ 	*/
+ 	@Test
+	public void departementoNoExiste() {
+
+		GestorEmpleados ge = new GestorEmpleados();
+		ge.cargarFichero();
+		assertTrue(ge.numeroEmpleadoPorDepartemento(10)==0);//si el departamento no existe
+		assertTrue(ge.numeroEmpleadoPorDepartemento(1145)==2);
+		assertTrue(ge.numeroEmpleadoPorDepartemento(500)==1);
+		assertTrue(ge.numeroEmpleadoPorDepartemento(1378)==2);
+		assertTrue(ge.numeroEmpleadoPorDepartemento(1454)==1);
+	}
 
 }
