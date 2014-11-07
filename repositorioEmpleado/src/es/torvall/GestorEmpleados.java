@@ -236,7 +236,12 @@ public void dummy() {
 		return s;
 
 	}
-	
+	/**
+	 * Método que añade un nuevo empleado
+	 * 
+	 * @param e
+	 * @return
+	 */
 	public boolean addEmpleado(Employee e) {
 
 		if (employeeList.add(e)) {
