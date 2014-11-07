@@ -104,18 +104,23 @@ public class GestorEmpleados {
             }
         }
     }
+    /**
+     * @author carlos barriuso
+     * @param idDepartamento
+     * @return El numero de empleados que tiene el departamento, si es 0 puede que no exista el departamento o que el departamento no tiene empleados actualmente
+     */
     public int numeroEmpleadoPorDepartemento(int idDepartamento){
-    	int numeroEmpleadosEnDepartemento;
-    	Employee e;
-    	//if (employeeList.size()==0){
+    	int numeroEmpleadoEnDepartemento=0;
+    	if (employeeList == null){ // Si el array esta vacio,se carga el fichero    	
     		cargarFichero();
-    	//}
-    	for(int i=0;i<employeeList.size();i++){
-    		if (employeeList[i]){
-    			numeroEmpleadoEnDepartamento++;
-    		}
     	}
-    	return numeroEmpleadoEnDepartamento;
+    	
+    	for(int i=0;i<employeeList.size();i++){ //se recorre el array
+    		if (employeeList.get(i).getDept_number()==idDepartamento){//si el id del empleado coincide con el que pasamos lo contamos en la variable
+    			numeroEmpleadoEnDepartemento++;
+    		}   		 
+    	}
+    	return numeroEmpleadoEnDepartemento; 
     }
 
 }
