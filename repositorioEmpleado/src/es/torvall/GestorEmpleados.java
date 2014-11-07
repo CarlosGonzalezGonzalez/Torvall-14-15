@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 
 public class GestorEmpleados {
 	public static final String fichero = "./resources/empleados";
@@ -299,5 +300,5 @@ public void dummy() {
     		}   		 
     	}
     	return numeroEmpleadoEnDepartemento; 
-    }
+    }    
 }

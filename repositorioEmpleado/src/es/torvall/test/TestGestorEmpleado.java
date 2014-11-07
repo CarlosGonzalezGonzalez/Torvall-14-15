@@ -60,7 +60,6 @@ public class TestGestorEmpleado {
         assertTrue(employeeList.get(0).getSalary()==500);//Aqui comprobamos que el nuevo salario es el correcto
         assertFalse(employeeList.get(2).getSalary()==5000);//Aqui comprobamos que el salario del empleado se ha modificado y no es igual a su salario anterior
     }
-
 	@Test
 	public void pruebaEliminar(){
 		GestorEmpleados g = new GestorEmpleados();
