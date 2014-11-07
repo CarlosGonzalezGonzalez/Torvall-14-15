@@ -13,7 +13,8 @@ import java.util.ArrayList;
 public class GestorEmpleados {
 
 	public static final String fichero = "./resources/empleados";
-	private static final ArrayList<Employee> employeeList = new ArrayList();
+	public static final String ficheroTemporal = "./resources/temp";
+	private ArrayList<Employee> employeeList = new ArrayList();
 
 	/**
 	 * MÃ©todo para crear un fichero de prueba
@@ -164,10 +165,16 @@ public class GestorEmpleados {
 
 	}
 
+	/**
+	 * Método que añade un nuevo empleado
+	 * 
+	 * @param e
+	 * @return
+	 */
+
 	public boolean addEmpleado(Employee e) {
 
 		if (employeeList.add(e)) {
-
 			guardarFichero(fichero);
 			return true;
 		}
@@ -176,30 +183,44 @@ public class GestorEmpleados {
 
 	}
 
-	private String guardarFichero(String ruta) {
-		File temp = new File(ruta, "temp");
-		File archivo = new File(ruta, "empleados.bin");
+	/**
+	 * Metodo que guarda el ArrayList en un fichero temporal y luegoe este se
+	 * renombra
+	 * 
+	 * @param ruta
+	 * @return
+	 */
 
-		ObjectOutputStream escribir = null;
-		try {
-			FileOutputStream fo = new FileOutputStream(temp);
-			escribir = new ObjectOutputStream(fo);
-			for (int i = 0; i < employeeList.size(); i++) {
-				escribir.writeObject(employeeList.get(i));
+	private String guardarFichero(final String ruta) {
+		Thread t = new Thread(ruta) {
+			public void run() {
+				File temp = new File(ruta, ficheroTemporal);
+				File archivo = new File(ruta, fichero);
+
+				ObjectOutputStream escribir = null;
+				try {
+					FileOutputStream fo = new FileOutputStream(temp);
+					escribir = new ObjectOutputStream(fo);
+					for (int i = 0; i < employeeList.size(); i++) {
+						escribir.writeObject(employeeList.get(i));
+					}
+					escribir.close();
+				} catch (FileNotFoundException fnfe) {
+				} catch (IOException ioe) {
+				}
+				if (temp.exists()) {
+					if (temp.renameTo(archivo)) {
+						archivo.delete();
+					}
+
+				} else {
+					System.err.println("Temp No Existe");
+
+				}
 			}
-			escribir.close();
-		} catch (FileNotFoundException fnfe) {
-		} catch (IOException ioe) {
-		}
-		if (temp.exists()) {
-			archivo.delete();
-			temp.renameTo(archivo);
-			return "Empleado Añadido al Archivo";
-
-		} else {
-			System.out.println("Temp No Existe");
-			return "Empleado NO Añadido al Archivo";
-		}
+		};
+		t.start();
+		return "Empleado Añadido al Archivo";
 
 	}
 
