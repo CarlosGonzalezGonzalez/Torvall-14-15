@@ -56,5 +56,40 @@ public class TestGestorEmpleado {
         assertTrue(employeeList.get(0).getSalary()==500);//Aqui comprobamos que el nuevo salario es el correcto
         assertFalse(employeeList.get(2).getSalary()==5000);//Aqui comprobamos que el salario del empleado se ha modificado y no es igual a su salario anterior
     }
+    /**
+     * Test para listar los  Departamentos sin repetirlos
+     */
+    @Test
+    public void testListarDepartamentos() {
+        //Creamos varios empleados para hacer las pruebas
+        ArrayList<Employee> employeeList = new ArrayList();
+        ArrayList<Integer>listDept=new ArrayList();
+        employeeList.add(new Employee(7902, "Norris", "Chuck", "empleado",
+                "17/12/1990", 5000, 0, 1145));
+        employeeList.add(new Employee(7888, "Hogan", "Hulk", "vendedor",
+                "1/01/1990", 1500, 0, 1378));
+        employeeList.add(new Employee(7567, "Ronaldo", "Cristiano",
+                "aparca_coches", "29/05/1991", 999999, 0, 1454));
+        employeeList.add(new Employee(7499, "Diaz", "Marujita", "vendedor",
+                "20/02/1990", 1500, 0, 1378));
+        employeeList.add(new Employee(7499, "Hermida", "Jesus", "pica_teclas",
+                "20/06/1989", 2500, 0, 500));
+        employeeList.add(new Employee(6700, "Chocolatero", "Paquito",
+                "cantante", "20/06/1989", 400, 0, 1145));
+       
+        
+        assertTrue(employeeList.get(0).getDept_number()==1145);//Aqui comprobamos que el dept  coincide
+        assertFalse(employeeList.get(2).getDept_number()==1);//Aqui comprobamos que el id no coincide
+        GestorEmpleados ge=new GestorEmpleados();
+        listDept=ge.listarDepartamentos();
+        assertTrue(listDept.get(0).intValue()==1145);//Aqui comprobamos que el primer departamento que sale es el 1145
+        assertFalse(listDept.get(0).intValue()==5000);//Aqui comprobamos que el primer departamento que sale  no es el 1145
+        assertTrue(listDept.size()==4);//Comprobamos que en la lista solo aparecen 4 departamentos
+        
+        
+    }
+        
+
+   
 
 }
