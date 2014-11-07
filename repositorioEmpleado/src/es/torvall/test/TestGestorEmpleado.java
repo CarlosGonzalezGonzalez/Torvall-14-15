@@ -20,7 +20,7 @@ public class TestGestorEmpleado {
 		} catch (ClienteNoEncontrado e) {}
 	}
 	
-	@SuppressWarnings("deprecation")
+	@Test
 	public void testCalcularSueldoMedio(){
 		GestorEmpleados ge = new GestorEmpleados();
 		
