@@ -222,6 +222,11 @@ public void dummy() {
 		return 0;
 
 	}
+	/**
+	 * Metodo que elimina un Empleado por su ID
+	 * @param id
+	 * @return
+	 */
 	public String eliminar(int id) {
 		String s = null;
 		for (int i = 0; i < employeeList.size(); i++) {
