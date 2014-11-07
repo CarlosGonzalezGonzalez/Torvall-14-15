@@ -236,4 +236,15 @@ public void dummy() {
 		return s;
 
 	}
+	
+	public boolean addEmpleado(Employee e) {
+
+		if (employeeList.add(e)) {
+			guardarFichero();
+			return true;
+		}
+
+		return false;
+
+	}
 }
