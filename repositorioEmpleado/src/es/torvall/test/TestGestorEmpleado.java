@@ -27,6 +27,8 @@ public class TestGestorEmpleado {
 		assertEquals(2700f,ge.calcularSueldoMedio(1145));
 		assertEquals(0f,ge.calcularSueldoMedio(1));
 	}
+
+	
      public void cambiarSalario() {
        
         ArrayList<Employee> employeeList = new ArrayList();
@@ -59,7 +61,7 @@ public class TestGestorEmpleado {
 	@Test
 	public void pruebaEliminar(){
 		GestorEmpleados g = new GestorEmpleados();
-		g.cargarFichero("./resources/empleados2");
+		g.cargarFichero();
 		
 		assertEquals("Borrado OK",g.eliminar(7902));
 		
