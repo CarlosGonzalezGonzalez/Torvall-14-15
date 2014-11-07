@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class GestorEmpleados {
 	public static final String fichero = "./resources/empleados";
@@ -203,7 +205,7 @@ public void dummy() {
 	public float calcularSueldoMedio(int departamento) {
 		float sueldoMedio = 0;
 		int contadorEmpleados = 0;
-		
+
 		if (employeeList == null) {
 			cargarFichero();
 		}
@@ -255,6 +257,28 @@ public void dummy() {
 		}
 
 		return false;
+
+	}
+	
+	/**
+	 * @author Katy
+	 *  Metodo para encotrar a los empleados ordenados por apellido
+	 * @return un ArrayList de empleados ordenado por apellidos
+	 */
+
+	public ArrayList<Employee> ordenApellido() {
+		if(employeeList==null)
+			cargarFichero();
+		
+		// Llamamos al método sort que ordena la lista por apellidos de cada empleado 
+		// mediante un objeto Comparator
+		Collections.sort(employeeList, new Comparator<Employee>() {
+			public int compare(Employee e1, Employee e2) {
+				return e1.getLastname().compareTo(e2.getLastname());
+			}
+		});
+
+		return employeeList;
 
 	}
 }
