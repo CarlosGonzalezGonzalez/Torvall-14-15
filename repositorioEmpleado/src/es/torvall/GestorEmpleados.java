@@ -110,7 +110,7 @@ public class GestorEmpleados {
 	}
 
 	/**
-	 * @author Katy
+	 * @author Cati
 	 *  Metodo para encotrar a los empleados ordenados por apellido
 	 * @return un ArrayList de empleados ordenado por apellidos
 	 */
