@@ -11,14 +11,26 @@ import es.torvall.Employee;
 import es.torvall.GestorEmpleados;
 
 public class TestGestorEmpleado {
+
 	@Test
 	public void testListarEmpleados() {
 		GestorEmpleados ge = new GestorEmpleados();
-		
+
 		try {
-			assertEquals(7499,ge.listarEmpleados(7499).getEmp_no());
-		} catch (ClienteNoEncontrado e) {}
+			assertEquals(7499, ge.listarEmpleados(7499).getEmp_no());
+		} catch (ClienteNoEncontrado e) {
+		}
+
 	}
+	
+	@Test
+	public void testCalcularSueldoMedio(){
+		GestorEmpleados ge = new GestorEmpleados();
+		
+		assertEquals(2700f,ge.calcularSueldoMedio(1145));
+		assertEquals(0f,ge.calcularSueldoMedio(1));
+	}
+
 	
      public void cambiarSalario() {
        
@@ -48,5 +60,32 @@ public class TestGestorEmpleado {
         assertTrue(employeeList.get(0).getSalary()==500);//Aqui comprobamos que el nuevo salario es el correcto
         assertFalse(employeeList.get(2).getSalary()==5000);//Aqui comprobamos que el salario del empleado se ha modificado y no es igual a su salario anterior
     }
+	@Test
+	public void pruebaEliminar(){
+		GestorEmpleados g = new GestorEmpleados();
+		g.cargarFichero();
+		
+		assertEquals("Borrado OK",g.eliminar(7902));
+		
+		
+		assertEquals("El Empleado No Existe",g.eliminar(6));
+	}
+	
+	/**
+	* @author carlos barriuso
+ 	*El metodo comprueba que el metodo numeroEmpleadoPorDepartamento
+ 	*funciona correctamente
+ 	*/
+ 	@Test
+	public void departementoNoExiste() {
+
+		GestorEmpleados ge = new GestorEmpleados();
+		ge.cargarFichero();
+		assertTrue(ge.numeroEmpleadoPorDepartemento(10)==0);//si el departamento no existe
+		assertTrue(ge.numeroEmpleadoPorDepartemento(1145)==2);
+		assertTrue(ge.numeroEmpleadoPorDepartemento(500)==1);
+		assertTrue(ge.numeroEmpleadoPorDepartemento(1378)==2);
+		assertTrue(ge.numeroEmpleadoPorDepartemento(1454)==1);
+	}
 
 }
