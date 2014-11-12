@@ -14,12 +14,12 @@ import java.util.HashSet;
 
 public class GestorEmpleados {
 	public static final String fichero = "./resources/empleados";
-	private  ArrayList<Employee> employeeList;
+	private ArrayList<Employee> employeeList;
 
 	/**
 	 * Método para crear un fichero de prueba
 	 */
-public void dummy() {
+	public void dummy() {
 		Employee e;
 		// Listado de empleados
 		employeeList.add(new Employee(7902, "Norris", "Chuck", "empleado",
@@ -47,7 +47,7 @@ public void dummy() {
 			streamEntrada = new ObjectInputStream(new FileInputStream(fichero));
 			e = (Employee) streamEntrada.readObject();
 			while (e != null) {
-				 System.out.println(e.toString());
+				System.out.println(e.toString());
 				e = (Employee) streamEntrada.readObject();
 			}
 			if (streamEntrada != null)
@@ -124,7 +124,7 @@ public void dummy() {
 
 			e = (Employee) streamEntrada.readObject();
 			while (e != null) {
-				//System.out.println(e);
+				// System.out.println(e);
 				employeeList.add(e);// AÃ±adimos el objeto employee a la clase
 									// empleado
 
@@ -170,9 +170,12 @@ public void dummy() {
 			try {
 				while (empleado != null) {
 					if (empleado.getEmp_no() == id) {
-						respuesta = empleado; // Si el empleado tiene el id lo igualamos a la respuesta,que devolveremos mas adelante
+						respuesta = empleado; // Si el empleado tiene el id lo
+												// igualamos a la respuesta,que
+												// devolveremos mas adelante
 					}
-					empleado = (Employee) ois.readObject(); // Leemos otro empleado
+					empleado = (Employee) ois.readObject(); // Leemos otro
+															// empleado
 				}
 			} catch (EOFException e) {
 			}
@@ -192,8 +195,9 @@ public void dummy() {
 
 		if (respuesta != null) {
 			return respuesta; // Devolvemos el cliente
-		} else {// Mostramos el mensaje de que no hay clientes con el id introducido
-			throw new ClienteNoEncontrado("No hay clientes con ese id"); 
+		} else {// Mostramos el mensaje de que no hay clientes con el id
+				// introducido
+			throw new ClienteNoEncontrado("No hay clientes con ese id");
 		}
 
 	}
@@ -212,9 +216,16 @@ public void dummy() {
 		}
 
 		for (Employee empleado : employeeList) {
-			if (empleado.getDept_number() == departamento) { // Si el departamento del empleado es = al departamento introducido...
-				sueldoMedio = sueldoMedio + empleado.getSalary(); // añadimos su sueldo
-				contadorEmpleados++; // incrementamos la cantidad de empleados que hay en el departamento
+			if (empleado.getDept_number() == departamento) { // Si el
+																// departamento
+																// del empleado
+																// es = al
+																// departamento
+																// introducido...
+				sueldoMedio = sueldoMedio + empleado.getSalary(); // añadimos su
+																	// sueldo
+				contadorEmpleados++; // incrementamos la cantidad de empleados
+										// que hay en el departamento
 			}
 		}
 		System.out.println(sueldoMedio);
@@ -225,8 +236,10 @@ public void dummy() {
 		return 0;
 
 	}
+
 	/**
 	 * Metodo que elimina un Empleado por su ID
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -244,6 +257,7 @@ public void dummy() {
 		return s;
 
 	}
+
 	/**
 	 * Método que añade un nuevo empleado
 	 * 
@@ -260,18 +274,18 @@ public void dummy() {
 		return false;
 
 	}
-	
+
 	/**
-	 * @author Katy
-	 *  Metodo para encotrar a los empleados ordenados por apellido
+	 * @author Katy Metodo para encotrar a los empleados ordenados por apellido
 	 * @return un ArrayList de empleados ordenado por apellidos
 	 */
 
 	public ArrayList<Employee> ordenApellido() {
-		if(employeeList==null)
+		if (employeeList == null)
 			cargarFichero();
-		
-		// Llamamos al método sort que ordena la lista por apellidos de cada empleado 
+
+		// Llamamos al método sort que ordena la lista por apellidos de cada
+		// empleado
 		// mediante un objeto Comparator
 		Collections.sort(employeeList, new Comparator<Employee>() {
 			public int compare(Employee e1, Employee e2) {
@@ -283,38 +297,59 @@ public void dummy() {
 	}
 
 	/*
-	* @author Juan
-	* Metodo que lista los departamentos
-	*/
- public ArrayList<Integer> listarDepartamentos() {
-       ArrayList<Integer> listDept = new ArrayList();          
-       HashSet<Integer> conjunto = new HashSet<Integer>();
-       
-        int departamento = 0;
-       if(employeeList!=null){
-         cargarFichero();
-       }
-       
-       return listDept;
-       
+	 * @author Juan Metodo que lista los departamentos
+	 */
+	public ArrayList<Integer> listarDepartamentos() {
+		ArrayList<Integer> listDept = new ArrayList();
+		HashSet<Integer> conjunto = new HashSet<Integer>();
+
+		int departamento = 0;
+		if (employeeList != null) {
+			cargarFichero();
+		}
+		for (int i = 0; i < employeeList.size(); i++) {
+			departamento = employeeList.get(i).getDept_number();
+			conjunto.add(departamento);
+		}
+		listDept.addAll(conjunto);
+
+		return listDept;
+
 	}
-	
+
 	/**
-     * @author carlos barriuso
-     * @param idDepartamento
-     * @return El numero de empleados que tiene el departamento, si es 0 puede que no exista el departamento o que el departamento no tiene empleados actualmente
-     */
-    public int numeroEmpleadoPorDepartemento(int idDepartamento){
-    	int numeroEmpleadoEnDepartemento=0;
-    	if (employeeList == null){ // Si el array esta vacio,se carga el fichero    	
-    		cargarFichero();
-    	}
-    	
-    	for(int i=0;i<employeeList.size();i++){ //se recorre el array
-    		if (employeeList.get(i).getDept_number()==idDepartamento){//si el id del empleado coincide con el que pasamos lo contamos en la variable
-    			numeroEmpleadoEnDepartemento++;
-    		}   		 
-    	}
-    	return numeroEmpleadoEnDepartemento; 
-    }    
+	 * @author carlos barriuso
+	 * @param idDepartamento
+	 * @return El numero de empleados que tiene el departamento, si es 0 puede
+	 *         que no exista el departamento o que el departamento no tiene
+	 *         empleados actualmente
+	 */
+	public int numeroEmpleadoPorDepartemento(int idDepartamento) {
+		int numeroEmpleadoEnDepartemento = 0;
+		if (employeeList == null) { // Si el array esta vacio,se carga el
+									// fichero
+			cargarFichero();
+		}
+
+		for (int i = 0; i < employeeList.size(); i++) { // se recorre el array
+			if (employeeList.get(i).getDept_number() == idDepartamento) {// si
+																			// el
+																			// id
+																			// del
+																			// empleado
+																			// coincide
+																			// con
+																			// el
+																			// que
+																			// pasamos
+																			// lo
+																			// contamos
+																			// en
+																			// la
+																			// variable
+				numeroEmpleadoEnDepartemento++;
+			}
+		}
+		return numeroEmpleadoEnDepartemento;
+	}
 }
