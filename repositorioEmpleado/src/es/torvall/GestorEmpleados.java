@@ -280,7 +280,23 @@ public void dummy() {
 		});
 
 		return employeeList;
+	}
 
+	/*
+	* @author Juan
+	* Metodo que lista los departamentos
+	*/
+ public ArrayList<Integer> listarDepartamentos() {
+       ArrayList<Integer> listDept = new ArrayList();          
+       HashSet<Integer> conjunto = new HashSet<Integer>();
+       
+        int departamento = 0;
+       if(employeeList!=null){
+         cargarFichero();
+       }
+       
+       return listDept;
+       
 	}
 	
 	/**
