@@ -21,7 +21,6 @@ public class Main {
 		sc.nextLine();
 		
 		
-		
 			
 		switch(opcion){
 		case 1:
