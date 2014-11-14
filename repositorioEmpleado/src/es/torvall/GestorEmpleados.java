@@ -21,6 +21,7 @@ public class GestorEmpleados {
 	 */
 	public void dummy() {
 		Employee e;
+		employeeList = new ArrayList<Employee>();
 		// Listado de empleados
 		employeeList.add(new Employee(7902, "Norris", "Chuck", "empleado",
 				"17/12/1990", 5000, 0, 1145));
