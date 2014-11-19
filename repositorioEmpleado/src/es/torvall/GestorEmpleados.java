@@ -133,18 +133,18 @@ public class GestorEmpleados {
 			}
 
 		} catch (FileNotFoundException e1) {
-			System.err.println("Error, archivo no encontrado");
+			System.err.println("Error, archivo no encontrado cargarFichero");
 		} catch (EOFException e1) {
 
 		} catch (IOException e1) {
-			System.err.println("Error E/S");
+			System.err.println("Error E/S cargarFichero");
 		} catch (ClassNotFoundException ex) {
-			System.err.println("Error clase no econtrada");
+			System.err.println("Error clase no econtrada cargarFichero");
 		} finally {
 			try {
 				streamEntrada.close();// Cerramos el flujo
 			} catch (IOException ex) {
-				System.err.println("Error E/S");
+				System.err.println("Error E/S cargarFichero");
 			}
 		}
 	}
@@ -266,7 +266,9 @@ public class GestorEmpleados {
 	 * @return
 	 */
 	public boolean addEmpleado(Employee e) {
-
+		if (employeeList == null) {
+			cargarFichero();
+		}
 		if (employeeList.add(e)) {
 			guardarFichero();
 			return true;
