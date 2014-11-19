@@ -9,8 +9,8 @@ public class Main {
 		Scanner sc=new Scanner(System.in);
 
 		GestorEmpleados ge = new GestorEmpleados();
-		
-		ge.cargarFichero();
+		ge.dummy();
+			ge.cargarFichero();
 		int opcion;
 		do{
           //Cambiar salario,listar,ordenar apellido,listar departamentos,
@@ -57,6 +57,7 @@ public class Main {
 			sc.nextLine();
 			
 			ge.eliminar(id);
+			ge.guardarFichero();
 			
 			break;
 		case 3:
