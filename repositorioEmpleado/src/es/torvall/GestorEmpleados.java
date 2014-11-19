@@ -76,8 +76,10 @@ public class GestorEmpleados {
 					System.err.println("Exception");
 				}
 			}
-			System.out.println(emp.toString());
 		}
+		
+		System.out.println("Cambio realizado correctamente");
+		
 		guardarFichero();
 	}
 
@@ -131,11 +133,11 @@ public class GestorEmpleados {
 
 				e = (Employee) streamEntrada.readObject();
 			}
-
+			
 		} catch (FileNotFoundException e1) {
 			System.err.println("Error, archivo no encontrado cargarFichero");
 		} catch (EOFException e1) {
-
+			
 		} catch (IOException e1) {
 			System.err.println("Error E/S cargarFichero");
 		} catch (ClassNotFoundException ex) {
@@ -229,8 +231,6 @@ public class GestorEmpleados {
 										// que hay en el departamento
 			}
 		}
-		System.out.println(sueldoMedio);
-		System.out.println(contadorEmpleados);
 		if (contadorEmpleados != 0) {
 			return sueldoMedio / contadorEmpleados;
 		}

@@ -1,28 +1,27 @@
 package es.torvall;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
 		Scanner sc=new Scanner(System.in);
-		
-		
-		
+
 		GestorEmpleados ge = new GestorEmpleados();
 		
-	//	ge.dummy();
+		ge.cargarFichero();
 		int opcion;
-	
+		do{
           //Cambiar salario,listar,ordenar apellido,listar departamentos,
 		//nº empleados departamento.
 		System.out.println("1.Añadir Cliente\n2.Eliminar Cliente\n3.Guardar\n4.Cargar\n5.Calcular sueldo medio\n6.Cambiar Salario\n7.Consultar empleado"
-				+ "\n8.Ordenar por apellido\n9.Numero empleados por departamento\n10.Listar Deparatamentos");
+				+ "\n8.Ordenar por apellido\n9.Numero empleados por departamento\n10.Listar Deparatamentos\n0.Salir");
 		opcion=sc.nextInt();
 		sc.nextLine();
 		
 		
-		
+			
 		switch(opcion){
 		case 1:
 			System.out.println("Numero empleado");
@@ -73,7 +72,7 @@ public class Main {
 			departamento = sc.nextInt();
 			sc.nextLine();
 
-			ge.calcularSueldoMedio(departamento);
+			System.out.println(ge.calcularSueldoMedio(departamento));
 
 			break;
 		case 6:
@@ -89,12 +88,15 @@ public class Main {
 			
 			break;
 		case 7:
+			Employee empleado = new Employee();
+			
 			System.out.println("Introduzca el id del empleado");
 			id = sc.nextInt();
 			sc.nextLine();
 			
 			try {
-				ge.listarEmpleados(id);
+				empleado = ge.listarEmpleados(id);
+				System.out.println(empleado.toString());
 			} catch (ClienteNoEncontrado ex) {
 				System.err.println("Empleado no encontrado");
 			}
@@ -112,10 +114,14 @@ public class Main {
 			
 			break;
 		case 10:
-			ge.listarDepartamentos();
-			
+			ArrayList<Integer>arrayNumDept = new ArrayList();
+			arrayNumDept = ge.listarDepartamentos();
+			for(Integer i : arrayNumDept){
+				System.out.println(i);
+			}
 			break;
 		}
+	}while(opcion != 0);
 	}
 		
 		
